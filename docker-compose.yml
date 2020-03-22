@@ -1,0 +1,31 @@
+version: '2.3'
+services:
+  postgres:
+    build: ./Database
+    image: postgresdatabase:latest
+    ports:
+      - "8000:5432"
+    restart: always
+    volumes:
+      - postgresstorage:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: -
+  pre_file:
+    build:
+      context: ./Backend
+      dockerfile: DockerfilePre
+    image: prefile:latest
+    restart: always
+  backend:
+    build: ./Backend
+    image: backend:latest
+    restart: always
+    depends_on:
+      - pre_file
+      - postgres
+    ports:
+      - "9090:5000"
+    links:
+      - "postgres"
+volumes:
+  postgresstorage:

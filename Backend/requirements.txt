@@ -1,0 +1,13 @@
+requests
+werkzeug
+beautifulsoup4
+flask
+flask-api
+flask-cors
+pyopenssl
+PyJWT
+gevent
+greenlet
+paramiko
+psycopg2
+overpy
